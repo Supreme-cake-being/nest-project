@@ -17,6 +17,7 @@ import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
 import { User } from './users.entity';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { Guard } from 'src/guards/auth.guard';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -27,6 +28,7 @@ export class UsersController {
   ) {}
 
   @Get('refresh')
+  @Guard()
   refresh(@CurrentUser() user: User) {
     return user;
   }
